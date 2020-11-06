@@ -4,7 +4,7 @@ Function Invoke-ManageSolrCloudConfigurationTask {
     [CmdletBinding(SupportsShouldProcess=$true)]
     param(
         [Parameter(Mandatory=$true)]
-		[ValidateSet('upload', 'list', 'delete')]
+		[ValidateSet('upload', 'list', 'delete', 'create')]
 		[string]$Action,
         [Parameter(Mandatory=$true)]
         [string]$Address,
@@ -31,6 +31,7 @@ Function Invoke-ManageSolrCloudConfigurationTask {
     )
 
 	try {
+		$Action = $Action.ToUpper()
 		Invoke-WebRequestTask -Uri $Address -RetryCount $RetryCount -RetryDelay $RetryDelay -RequestTimeout $RequestTimeout
 
 		$solrArgs = @()
@@ -55,7 +56,7 @@ Function Invoke-ManageSolrCloudConfigurationTask {
 			if($PSCmdlet.ShouldProcess($Address, "Invoke-ManageSolrCloudConfigurationTask -Address $Address -Action $Action")) {
 				WriteTaskInfo -MessageData ("Performing $Action on $Address" | Out-String) -Tag 'SolrCloudConfiguration'
 
-                if($Action -eq "Upload") {
+                if($Action -eq "UPLOAD") {
 					$list = Invoke-ManageSolrCloudConfigurationTask -Action "list" -Address $Address
 					if(!($list.configSets -contains $Arguments.name)) {
 						Write-Verbose "Uploading to SolrCloud: Uri => '$uri'"

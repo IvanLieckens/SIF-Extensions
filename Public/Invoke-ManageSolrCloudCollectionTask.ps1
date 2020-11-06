@@ -4,7 +4,7 @@ Function Invoke-ManageSolrCloudCollectionTask {
     [CmdletBinding(SupportsShouldProcess=$true)]
     param(
         [Parameter(Mandatory=$true)]
-		[ValidateSet('status', 'create', 'createalias', 'delete', 'deletealias', 'list', 'reload', 'rename', 'swap',  'unload', 'mergeindexes', 'split', 'requeststatus', 'requestrecovery')]
+		[ValidateSet('create', 'modifycollection', 'reindexcollection', 'reload', 'rename', 'splitshard', 'createshard', 'deleteshard', 'createalias', 'listaliases', 'aliasprop', 'deletealias', 'delete', 'deletereplica', 'addreplica', 'clusterprop', 'collectionprop', 'colstatus', 'migrate', 'addrole', 'removerole', 'overseerstatus', 'clusterstatus', 'requeststatus', 'deletestatus', 'list', 'addreplicaprop', 'deletereplicaprop', 'balanceshardunique', 'rebalanceleaders', 'forceleader', 'migratestateformat', 'backup', 'restore', 'deletenode', 'replacenode', 'movereplica', 'utilizenode')]
 		[string]$Action,
         [Parameter(Mandatory=$true)]
         [string]$Address,
